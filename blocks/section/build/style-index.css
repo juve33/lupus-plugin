@@ -1,0 +1,87 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-lupus-plugin-section,
+.wp-block-lupus-plugin-section__inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.wp-block-lupus-plugin-section__before,
+.wp-block-lupus-plugin-section__after {
+  display: none;
+}
+
+.wp-block-lupus-plugin-section.full-sized {
+  min-height: calc(100vh - var(--wp-support-bar, 0px));
+  min-height: calc(100svh - var(--wp-support-bar, 0px));
+  align-content: center;
+  scroll-snap-align: start;
+  scroll-margin: 0 0 0;
+}
+
+.wp-block-lupus-plugin-section.alternative-colors {
+  color: var(--alternative-font-color, white);
+  background: fixed var(--alternative-background-color, dimgray);
+}
+
+.wp-block-lupus-plugin-section__logo-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: fixed center calc(50% + var(--wp-support-bar) / 2)/300px no-repeat;
+  background-image: var(--alternative-logo-src, var(--logo-src, var(--wp-logo-url)));
+  filter: grayscale(1);
+  opacity: 15%;
+  z-index: 0;
+}
+
+.wp-block-lupus-plugin-section__message-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  align-content: space-between;
+  justify-content: center;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  opacity: 15%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  z-index: 0;
+}
+
+.wp-block-lupus-plugin-section__message-line {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.wp-block-lupus-plugin-section__message-line__inner {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-wrap: nowrap;
+}
+
+.wp-block-lupus-plugin-section__message-group:nth-of-type(odd) .wp-block-lupus-plugin-section__message-line:nth-of-type(even) .wp-block-lupus-plugin-section__message-line__inner,
+.wp-block-lupus-plugin-section__message-group:nth-of-type(even) .wp-block-lupus-plugin-section__message-line:nth-of-type(odd) .wp-block-lupus-plugin-section__message-line__inner {
+  transform: translate(-50%);
+}
+
+/*# sourceMappingURL=style-index.css.map*/
