@@ -83,3 +83,39 @@
 .wp-block-lupus-plugin-section__message-group:nth-of-type(even) .wp-block-lupus-plugin-section__message-line:nth-of-type(odd) .wp-block-lupus-plugin-section__message-line__inner {
   transform: translate(50%);
 }
+
+.wp-block-lupus-plugin-section.image {
+  color: var(--alternative-font-color, white);
+}
+
+.wp-block-lupus-plugin-section__image-overlay,
+.wp-block-lupus-plugin-section__image-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.wp-block-lupus-plugin-section__image-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+.wp-block-lupus-plugin-section__image-container {
+  background: no-repeat scroll center/cover;
+  z-index: -1;
+}
+
+.wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-overlay,
+.wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-container {
+  background-attachment: fixed;
+}
+
+.wp-block-lupus-plugin-section__photocredit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5em 1em;
+  z-index: 1;
+}

@@ -64,14 +64,21 @@ function Edit({
   const {
     fullSized,
     background,
+    backgroundImageURL,
+    backgroundParallax,
     photoCredit,
+    photoCreditText,
     backgroundFeature,
     backgroundMessage,
     horizontal
   } = attributes;
   const blockName = 'wp-block-lupus-plugin-section';
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-    className: `${fullSized && !horizontal ? 'full-sized' : ''} ${background ? background : ''}`
+    className: `
+			${fullSized && !horizontal ? 'full-sized' : ''}
+			${background ? background : ''}
+			${backgroundParallax ? 'image-fixed' : ''}
+		`
   });
   const generateText = message => {
     let text_ = message + ' ';
@@ -84,9 +91,9 @@ function Edit({
   };
   const text = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useMemo)(() => generateText(backgroundMessage), [backgroundMessage]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'lupus-plugin'),
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('General Settings', 'lupus-plugin'),
         children: [!horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
           checked: !!fullSized,
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Full-sized', 'lupus-plugin'),
@@ -132,7 +139,10 @@ function Edit({
           onChange: value => setAttributes({
             background: value
           })
-        }), background != 'image' && !horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        })]
+      }), !horizontal && background != 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Settings', 'lupus-plugin'),
+        children: [!horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Feature', 'lupus-plugin'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Determine the background feature of the section', 'lupus-plugin'),
           value: backgroundFeature,
@@ -149,7 +159,7 @@ function Edit({
           onChange: value => setAttributes({
             backgroundFeature: value
           })
-        }), background != 'image' && backgroundFeature == 'background-message' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        }), backgroundFeature == 'background-message' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Message', 'lupus-plugin'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the message that is shown in the background of the section', 'lupus-plugin'),
           value: backgroundMessage,
@@ -157,7 +167,50 @@ function Edit({
             backgroundMessage: value
           })
         })]
-      })
+      }), !horizontal && background == 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Image Settings', 'lupus-plugin'),
+        children: [backgroundImageURL != '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+          src: backgroundImageURL,
+          style: {
+            width: '100%'
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+            onSelect: media => {
+              setAttributes({
+                backgroundImageURL: media.url
+              });
+            },
+            allowedTypes: ['image'],
+            render: ({
+              open
+            }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+              onClick: open,
+              variant: "secondary",
+              style: {
+                marginBottom: '16px'
+              },
+              children: backgroundImageURL ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace Background Image', 'lupus-plugin') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Background Image', 'lupus-plugin')
+            })
+          })
+        }), backgroundImageURL && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            checked: !!backgroundParallax,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fixed Background', 'lupus-plugin'),
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Whether background shall be fixed or move when scrolling', 'lupus-plugin'),
+            onChange: () => setAttributes({
+              backgroundParallax: !backgroundParallax
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            checked: !!photoCredit,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Photocredit', 'lupus-plugin'),
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Toggle the photocredit field', 'lupus-plugin'),
+            onChange: () => setAttributes({
+              photoCredit: !photoCredit
+            })
+          })]
+        })]
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
       ...blockProps,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -183,6 +236,26 @@ function Edit({
             }, `line-inner-${i}-${j}-${k}`))
           }, `line-${i}-${j}`))
         }, `group-${i}`))
+      }), background == 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: `${blockName}__image-overlay`
+        }), backgroundImageURL != '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          style: {
+            backgroundImage: `url(${backgroundImageURL})`
+          },
+          className: `${blockName}__image-container`
+        }), photoCredit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+          tagName: "p",
+          className: `${blockName}__photocredit`,
+          value: photoCreditText,
+          allowedFormats: ['core/link'],
+          onChange: content => {
+            setAttributes({
+              photoCreditText: content
+            });
+          },
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Photo Credit')
+        })]
       })]
     })]
   });
@@ -282,7 +355,10 @@ function save({
   const {
     fullSized,
     background,
+    backgroundImageURL,
+    backgroundParallax,
     photoCredit,
+    photoCreditText,
     backgroundFeature,
     backgroundMessage,
     horizontal
@@ -294,6 +370,7 @@ function save({
 			${fullSized && !horizontal ? 'full-sized' : ''}
 			${background ? background : ''}
 			${background != 'image' && backgroundFeature == 'background-logo' ? backgroundFeature : ''}
+			${backgroundParallax ? 'image-fixed' : ''}
 		`
   });
   const generateText = message => {
@@ -336,6 +413,19 @@ function save({
             }, `line-inner-${i}-${j}-${k}`))
           }, `line-${i}-${j}`))
         }, `group-${i}`))
+      }), background == 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: `${blockName}__image-overlay`
+        }), backgroundImageURL != '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          style: {
+            backgroundImage: `url(${backgroundImageURL})`
+          },
+          className: `${blockName}__image-container`
+        }), photoCredit && photoCreditText != '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+          tagName: "p",
+          className: `${blockName}__photocredit`,
+          value: photoCreditText
+        })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: `${blockName}__after ${background ? background : ''}`
@@ -435,7 +525,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"lupus-plugin/section","version":"0.1.0","title":"Section","category":"design","icon":"text-page","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":true,"background":{"backgroundImage":true,"backgroundSize":true},"html":false},"attributes":{"fullSized":{"type":"boolean","default":false},"background":{"type":"string","default":""},"photoCredit":{"type":"boolean","default":true},"backgroundFeature":{"type":"string","default":""},"backgroundMessage":{"type":"string","default":""},"horizontal":{"type":"boolean","default":false}},"textdomain":"section","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"lupus-plugin/section","version":"0.1.0","title":"Section","category":"design","icon":"text-page","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":true,"background":{"backgroundImage":true,"backgroundSize":true},"html":false},"attributes":{"fullSized":{"type":"boolean","default":false},"background":{"type":"string","default":""},"backgroundImageURL":{"type":"string","default":""},"backgroundParallax":{"type":"boolean","default":true},"photoCredit":{"type":"boolean","default":true},"photoCreditText":{"type":"string","default":"","source":"html","selector":"p"},"backgroundFeature":{"type":"string","default":""},"backgroundMessage":{"type":"string","default":""},"horizontal":{"type":"boolean","default":false}},"textdomain":"section","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

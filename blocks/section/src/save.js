@@ -4,7 +4,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -16,7 +16,7 @@ import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
  * @return {Element} Element to render.
  */
 export default function save( { attributes } ) {
-	const { fullSized, background, photoCredit, backgroundFeature, backgroundMessage, horizontal } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, horizontal } = attributes;
 	const blockName = useBlockProps.save().className;
 	const blockProps = useBlockProps.save({
         className: `
@@ -24,6 +24,7 @@ export default function save( { attributes } ) {
 			${(fullSized && (! horizontal)) ? 'full-sized' : ''}
 			${background ? background : ''}
 			${((background!='image') && (backgroundFeature=='background-logo')) ? backgroundFeature : ''}
+			${backgroundParallax ? 'image-fixed' : ''}
 		`,
     });
 
@@ -64,6 +65,21 @@ export default function save( { attributes } ) {
 							</div>
 						)) }
 					</div>
+				) }
+				{ (background=='image') && (
+					<>
+						<span className={`${blockName}__image-overlay`}></span>
+						{ (backgroundImageURL!='') && (
+								<div style={{ backgroundImage: `url(${backgroundImageURL})` }} className={`${blockName}__image-container`} ></div>
+						) }
+						{ ((photoCredit) && (photoCreditText!='')) && (
+							<RichText.Content
+								tagName="p"
+								className={`${blockName}__photocredit`}
+								value={ photoCreditText }
+							/>
+						) }
+					</>
 				) }
 			</section>
 			<div className={`${blockName}__after ${background ? background : ''}`}></div>

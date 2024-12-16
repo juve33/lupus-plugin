@@ -25,9 +25,23 @@
       "type": "string",
       "default": ""
     },
+    "backgroundImageURL": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundParallax": {
+      "type": "boolean",
+      "default": true
+    },
     "photoCredit": {
       "type": "boolean",
       "default": true
+    },
+    "photoCreditText": {
+      "type": "string",
+      "default": "",
+      "source": "html",
+      "selector": "p"
     },
     "backgroundFeature": {
       "type": "string",

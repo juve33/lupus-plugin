@@ -11,9 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, InspectorControls, MediaUpload, MediaUploadCheck, RichText } from '@wordpress/block-editor';
 
-import { PanelBody, RadioControl, SelectControl, TextControl, ToggleControl } from '@wordpress/components';
+import { Button, PanelBody, SelectControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import { useMemo } from '@wordpress/element';
 
@@ -34,10 +34,14 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { fullSized, background, photoCredit, backgroundFeature, backgroundMessage, horizontal } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, horizontal } = attributes;
 	const blockName = 'wp-block-lupus-plugin-section';
 	const blockProps = useBlockProps({
-        className: `${(fullSized && (! horizontal)) ? 'full-sized' : ''} ${background ? background : ''}`,
+        className: `
+			${(fullSized && (! horizontal)) ? 'full-sized' : ''}
+			${background ? background : ''}
+			${backgroundParallax ? 'image-fixed' : ''}
+		`,
     });
 
 	const generateText = (message) => {
@@ -55,7 +59,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', 'lupus-plugin' ) }>
+				<PanelBody title={ __( 'General Settings', 'lupus-plugin' ) }>
 					{ (! horizontal) && (
                         <ToggleControl
 							checked={ !! fullSized }
@@ -137,48 +141,110 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					) }
-					{ ((background!='image') && (! horizontal)) && (
-                        <SelectControl
-							label={ __(
-								'Background Feature',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Determine the background feature of the section',
-								'lupus-plugin'
-							) }
-							value={ backgroundFeature }
-							options={ [
-								{ label: 'None', value: '' },
-								{ label: 'Logo', value: 'background-logo' },
-								{ label: 'Message', value: 'background-message' },
-							] }
-							onChange={ ( value ) =>
-								setAttributes( {
-									backgroundFeature: value,
-								} )
-							}
-						/>
-                    ) }
-					{ ((background!='image') && (backgroundFeature=='background-message')) && (
-                        <TextControl
-							label={ __(
-								'Background Message',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Set the message that is shown in the background of the section',
-								'lupus-plugin'
-							) }
-							value={ backgroundMessage }
-							onChange={ ( value ) =>
-								setAttributes( {
-									backgroundMessage: value,
-								} )
-							}
-						/>
-                    ) }
                 </PanelBody>
+				{ ((! horizontal) && (background!='image')) && (
+					<PanelBody title={ __( 'Background Settings', 'lupus-plugin' ) }>
+						{ (! horizontal) && (
+							<SelectControl
+								label={ __(
+									'Background Feature',
+									'lupus-plugin'
+								) }
+								help={ __(
+									'Determine the background feature of the section',
+									'lupus-plugin'
+								) }
+								value={ backgroundFeature }
+								options={ [
+									{ label: 'None', value: '' },
+									{ label: 'Logo', value: 'background-logo' },
+									{ label: 'Message', value: 'background-message' },
+								] }
+								onChange={ ( value ) =>
+									setAttributes( {
+										backgroundFeature: value,
+									} )
+								}
+							/>
+						) }
+						{ (backgroundFeature=='background-message') && (
+							<TextControl
+								label={ __(
+									'Background Message',
+									'lupus-plugin'
+								) }
+								help={ __(
+									'Set the message that is shown in the background of the section',
+									'lupus-plugin'
+								) }
+								value={ backgroundMessage }
+								onChange={ ( value ) =>
+									setAttributes( {
+										backgroundMessage: value,
+									} )
+								}
+							/>
+						) }
+					</PanelBody>
+				) }
+				{ ((! horizontal) && (background=='image')) && (
+					<PanelBody title={ __( 'Background Image Settings', 'lupus-plugin' ) }>
+						{ (backgroundImageURL!='') && (
+								<img src={ backgroundImageURL } style={{ width: '100%' }} />
+						) }
+						<MediaUploadCheck>
+							<MediaUpload
+								onSelect={(media) => {
+									setAttributes({ backgroundImageURL: media.url });
+								} }
+								allowedTypes={['image']}
+								render={({ open }) => (
+									<Button onClick={ open } variant="secondary" style={{ marginBottom: '16px' }}>
+										{ backgroundImageURL
+											? __( 'Replace Background Image', 'lupus-plugin' )
+											: __( 'Select Background Image', 'lupus-plugin' ) }
+									</Button>
+								)}
+							/>
+						</MediaUploadCheck>
+						{ (backgroundImageURL) && (
+							<>
+								<ToggleControl
+									checked={ !! backgroundParallax }
+									label={ __(
+										'Fixed Background',
+										'lupus-plugin'
+									) }
+									help={ __(
+										'Whether background shall be fixed or move when scrolling',
+										'lupus-plugin'
+									) }
+									onChange={ () =>
+										setAttributes( {
+											backgroundParallax: ! backgroundParallax,
+										} )
+									}
+								/>
+								<ToggleControl
+									checked={ !! photoCredit }
+									label={ __(
+										'Photocredit',
+										'lupus-plugin'
+									) }
+									help={ __(
+										'Toggle the photocredit field',
+										'lupus-plugin'
+									) }
+									onChange={ () =>
+										setAttributes( {
+											photoCredit: ! photoCredit,
+										} )
+									}
+								/>
+							</>
+						) }
+					</PanelBody>
+				) }
 			</InspectorControls>
 			<section { ...blockProps }>
 				<div className={`${blockName}__inner`}>
@@ -201,6 +267,26 @@ export default function Edit( { attributes, setAttributes } ) {
 							</div>
 						)) }
 					</div>
+				) }
+				{ (background=='image') && (
+					<>
+						<span className={`${blockName}__image-overlay`}></span>
+						{ (backgroundImageURL!='') && (
+								<div style={{ backgroundImage: `url(${backgroundImageURL})` }} className={`${blockName}__image-container`} ></div>
+						) }
+						{ (photoCredit) && (
+							<RichText
+								tagName="p" 
+								className={`${blockName}__photocredit`}
+								value={ photoCreditText }
+								allowedFormats={ [ 'core/link' ] }
+								onChange={(content) => {
+									setAttributes({ photoCreditText: content });
+								} }
+								placeholder={ __( 'Photo Credit' ) }
+							/>
+						) }
+					</>
 				) }
 			</section>
 		</>
