@@ -34,11 +34,11 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, horizontal } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage } = attributes;
 	const blockName = 'wp-block-lupus-plugin-section';
 	const blockProps = useBlockProps({
         className: `
-			${(fullSized && (! horizontal)) ? 'full-sized' : ''}
+			${fullSized ? 'full-sized' : ''}
 			${background ? background : ''}
 			${backgroundParallax ? 'image-fixed' : ''}
 		`,
@@ -60,113 +60,67 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'General Settings', 'lupus-plugin' ) }>
-					{ (! horizontal) && (
-                        <ToggleControl
-							checked={ !! fullSized }
-							label={ __(
-								'Full-sized',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Whether the section shall cover the whole screen height',
-								'lupus-plugin'
-							) }
-							onChange={ () =>
-								setAttributes( {
-									fullSized: ! fullSized,
-								} )
-							}
-						/>
-                    ) }
-					{ ((background!='image') && (backgroundFeature=='')) && (
-                        <ToggleControl
-							checked={ !! horizontal }
-							label={ __(
-								'Horizontal Scroll',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Enables horizontal scrolling within the section',
-								'lupus-plugin'
-							) }
-							onChange={ () =>
-								setAttributes( {
-									horizontal: ! horizontal,
-								} )
-							}
-						/>
-                    ) }
-					{ (! horizontal) && (
-						<SelectControl
-							label={ __(
-								'Background',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Determine the background of the section',
-								'lupus-plugin'
-							) }
-							value={ background }
-							options={ [
-								{ label: 'Default', value: '' },
-								{ label: 'Alternative Colors', value: 'alternative-colors' },
-								{ label: 'Image', value: 'image' },
-							] }
-							onChange={ ( value ) =>
-								setAttributes( {
-									background: value,
-								} )
-							}
-						/>
-					) }
-					{ (horizontal) && (
-						<SelectControl
-							label={ __(
-								'Background',
-								'lupus-plugin'
-							) }
-							help={ __(
-								'Determine the background of the section',
-								'lupus-plugin'
-							) }
-							value={ background }
-							options={ [
-								{ label: 'Default', value: '' },
-								{ label: 'Alternative Colors', value: 'alternative-colors' },
-							] }
-							onChange={ ( value ) =>
-								setAttributes( {
-									background: value,
-								} )
-							}
-						/>
-					) }
-                </PanelBody>
-				{ ((! horizontal) && (background!='image')) && (
-					<PanelBody title={ __( 'Background Settings', 'lupus-plugin' ) }>
-						{ (! horizontal) && (
-							<SelectControl
-								label={ __(
-									'Background Feature',
-									'lupus-plugin'
-								) }
-								help={ __(
-									'Determine the background feature of the section',
-									'lupus-plugin'
-								) }
-								value={ backgroundFeature }
-								options={ [
-									{ label: 'None', value: '' },
-									{ label: 'Logo', value: 'background-logo' },
-									{ label: 'Message', value: 'background-message' },
-								] }
-								onChange={ ( value ) =>
-									setAttributes( {
-										backgroundFeature: value,
-									} )
-								}
-							/>
+					<ToggleControl
+						checked={ !! fullSized }
+						label={ __(
+							'Full-sized',
+							'lupus-plugin'
 						) }
+						help={ __(
+							'Whether the section shall cover the whole screen height',
+							'lupus-plugin'
+						) }
+						onChange={ () =>
+							setAttributes( {
+								fullSized: ! fullSized,
+							} )
+						}
+					/>
+					<SelectControl
+						label={ __(
+							'Background',
+							'lupus-plugin'
+						) }
+						help={ __(
+							'Determine the background of the section',
+							'lupus-plugin'
+						) }
+						value={ background }
+						options={ [
+							{ label: 'Default', value: '' },
+							{ label: 'Alternative Colors', value: 'alternative-colors' },
+							{ label: 'Image', value: 'image' },
+						] }
+						onChange={ ( value ) =>
+							setAttributes( {
+								background: value,
+							} )
+						}
+					/>
+                </PanelBody>
+				{ (background!='image') && (
+					<PanelBody title={ __( 'Background Settings', 'lupus-plugin' ) }>
+						<SelectControl
+							label={ __(
+								'Background Feature',
+								'lupus-plugin'
+							) }
+							help={ __(
+								'Determine the background feature of the section',
+								'lupus-plugin'
+							) }
+							value={ backgroundFeature }
+							options={ [
+								{ label: 'None', value: '' },
+								{ label: 'Logo', value: 'background-logo' },
+								{ label: 'Message', value: 'background-message' },
+							] }
+							onChange={ ( value ) =>
+								setAttributes( {
+									backgroundFeature: value,
+								} )
+							}
+						/>
 						{ (backgroundFeature=='background-message') && (
 							<TextControl
 								label={ __(
@@ -187,7 +141,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</PanelBody>
 				) }
-				{ ((! horizontal) && (background=='image')) && (
+				{ (background=='image') && (
 					<PanelBody title={ __( 'Background Image Settings', 'lupus-plugin' ) }>
 						{ (backgroundImageURL!='') && (
 								<img src={ backgroundImageURL } style={{ width: '100%' }} />

@@ -50,10 +50,6 @@
     "backgroundMessage": {
       "type": "string",
       "default": ""
-    },
-    "horizontal": {
-      "type": "boolean",
-      "default": false
     }
   },
   "textdomain": "section",

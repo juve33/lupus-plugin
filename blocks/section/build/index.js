@@ -69,13 +69,12 @@ function Edit({
     photoCredit,
     photoCreditText,
     backgroundFeature,
-    backgroundMessage,
-    horizontal
+    backgroundMessage
   } = attributes;
   const blockName = 'wp-block-lupus-plugin-section';
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
     className: `
-			${fullSized && !horizontal ? 'full-sized' : ''}
+			${fullSized ? 'full-sized' : ''}
 			${background ? background : ''}
 			${backgroundParallax ? 'image-fixed' : ''}
 		`
@@ -94,21 +93,14 @@ function Edit({
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('General Settings', 'lupus-plugin'),
-        children: [!horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
           checked: !!fullSized,
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Full-sized', 'lupus-plugin'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Whether the section shall cover the whole screen height', 'lupus-plugin'),
           onChange: () => setAttributes({
             fullSized: !fullSized
           })
-        }), background != 'image' && backgroundFeature == '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-          checked: !!horizontal,
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Horizontal Scroll', 'lupus-plugin'),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enables horizontal scrolling within the section', 'lupus-plugin'),
-          onChange: () => setAttributes({
-            horizontal: !horizontal
-          })
-        }), !horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background', 'lupus-plugin'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Determine the background of the section', 'lupus-plugin'),
           value: background,
@@ -125,24 +117,10 @@ function Edit({
           onChange: value => setAttributes({
             background: value
           })
-        }), horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background', 'lupus-plugin'),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Determine the background of the section', 'lupus-plugin'),
-          value: background,
-          options: [{
-            label: 'Default',
-            value: ''
-          }, {
-            label: 'Alternative Colors',
-            value: 'alternative-colors'
-          }],
-          onChange: value => setAttributes({
-            background: value
-          })
         })]
-      }), !horizontal && background != 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      }), background != 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Settings', 'lupus-plugin'),
-        children: [!horizontal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Feature', 'lupus-plugin'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Determine the background feature of the section', 'lupus-plugin'),
           value: backgroundFeature,
@@ -167,7 +145,7 @@ function Edit({
             backgroundMessage: value
           })
         })]
-      }), !horizontal && background == 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      }), background == 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Image Settings', 'lupus-plugin'),
         children: [backgroundImageURL != '' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           src: backgroundImageURL,
@@ -360,14 +338,12 @@ function save({
     photoCredit,
     photoCreditText,
     backgroundFeature,
-    backgroundMessage,
-    horizontal
+    backgroundMessage
   } = attributes;
   const blockName = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save().className;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
     className: `
-			${background != 'image' && backgroundFeature == '' && horizontal ? 'horizontal full-sized' : ''}
-			${fullSized && !horizontal ? 'full-sized' : ''}
+			${fullSized ? 'full-sized' : ''}
 			${background ? background : ''}
 			${background != 'image' && backgroundFeature == 'background-logo' ? backgroundFeature : ''}
 			${backgroundParallax ? 'image-fixed' : ''}
@@ -525,7 +501,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"lupus-plugin/section","version":"0.1.0","title":"Section","category":"design","icon":"text-page","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":true,"background":{"backgroundImage":true,"backgroundSize":true},"html":false},"attributes":{"fullSized":{"type":"boolean","default":false},"background":{"type":"string","default":""},"backgroundImageURL":{"type":"string","default":""},"backgroundParallax":{"type":"boolean","default":true},"photoCredit":{"type":"boolean","default":true},"photoCreditText":{"type":"string","default":"","source":"html","selector":"p"},"backgroundFeature":{"type":"string","default":""},"backgroundMessage":{"type":"string","default":""},"horizontal":{"type":"boolean","default":false}},"textdomain":"section","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"lupus-plugin/section","version":"0.1.0","title":"Section","category":"design","icon":"text-page","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"anchor":true,"background":{"backgroundImage":true,"backgroundSize":true},"html":false},"attributes":{"fullSized":{"type":"boolean","default":false},"background":{"type":"string","default":""},"backgroundImageURL":{"type":"string","default":""},"backgroundParallax":{"type":"boolean","default":true},"photoCredit":{"type":"boolean","default":true},"photoCreditText":{"type":"string","default":"","source":"html","selector":"p"},"backgroundFeature":{"type":"string","default":""},"backgroundMessage":{"type":"string","default":""}},"textdomain":"section","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

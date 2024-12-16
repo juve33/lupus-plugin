@@ -16,12 +16,11 @@ import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
  * @return {Element} Element to render.
  */
 export default function save( { attributes } ) {
-	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, horizontal } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage } = attributes;
 	const blockName = useBlockProps.save().className;
 	const blockProps = useBlockProps.save({
         className: `
-			${((background!='image') && (backgroundFeature==''))  && (horizontal) ? 'horizontal full-sized' : ''}
-			${(fullSized && (! horizontal)) ? 'full-sized' : ''}
+			${fullSized ? 'full-sized' : ''}
 			${background ? background : ''}
 			${((background!='image') && (backgroundFeature=='background-logo')) ? backgroundFeature : ''}
 			${backgroundParallax ? 'image-fixed' : ''}
