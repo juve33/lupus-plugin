@@ -14,8 +14,7 @@
 	z-index: 1;
 }
 
-.wp-block-lupus-plugin-section__before,
-.wp-block-lupus-plugin-section__after {
+.wp-block-lupus-plugin-section__before-after {
 	display: none;
 }
 
@@ -115,9 +114,11 @@
 	z-index: -1;
 }
 
-.wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-overlay,
-.wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-container {
-	background-attachment: fixed;
+@media (prefers-reduced-motion: no-preference) {
+    .wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-overlay,
+	.wp-block-lupus-plugin-section.image-fixed .wp-block-lupus-plugin-section__image-container {
+		background-attachment: fixed;
+	}
 }
 
 .wp-block-lupus-plugin-section__photocredit {

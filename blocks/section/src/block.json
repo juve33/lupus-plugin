@@ -10,10 +10,6 @@
 	"example": {},
 	"supports": {
 		"anchor": true,
-		"background": {
-			"backgroundImage": true,
-			"backgroundSize": true
-		},
 		"html": false
 	},
 	"attributes": {
@@ -50,6 +46,14 @@
 		"backgroundMessage": {
 			"type": "string",
 			"default": ""
+		},
+		"beforeElement": {
+			"type": "boolean",
+			"default": false
+		},
+		"afterElement": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"textdomain": "section",

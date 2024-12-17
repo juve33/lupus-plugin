@@ -16,7 +16,7 @@ import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
  * @return {Element} Element to render.
  */
 export default function save( { attributes } ) {
-	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, beforeElement, afterElement } = attributes;
 	const blockName = useBlockProps.save().className;
 	const blockProps = useBlockProps.save({
         className: `
@@ -42,7 +42,9 @@ export default function save( { attributes } ) {
 
 	return (
 		<>
-			<div className={`${blockName}__before ${background ? background : ''}`}></div>
+			{ (beforeElement) && (
+				<div className={`${blockName}__before ${blockName}__before-after ${background ? background : ''}`}></div>
+			) }
 			<section { ...blockProps }>
 				<div className={`${blockName}__inner`}>
 					<InnerBlocks.Content />
@@ -81,7 +83,9 @@ export default function save( { attributes } ) {
 					</>
 				) }
 			</section>
-			<div className={`${blockName}__after ${background ? background : ''}`}></div>
+			{ (afterElement) && (
+				<div className={`${blockName}__after ${blockName}__before-after ${background ? background : ''}`}></div>
+			) }
 		</>
 	);
 }

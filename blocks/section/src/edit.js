@@ -17,6 +17,8 @@ import { Button, PanelBody, SelectControl, TextControl, ToggleControl } from '@w
 
 import { useMemo } from '@wordpress/element';
 
+import { useSelect } from '@wordpress/data';
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -34,7 +36,7 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage } = attributes;
+	const { fullSized, background, backgroundImageURL, backgroundParallax, photoCredit, photoCreditText, backgroundFeature, backgroundMessage, beforeElement, afterElement } = attributes;
 	const blockName = 'wp-block-lupus-plugin-section';
 	const blockProps = useBlockProps({
         className: `
@@ -43,6 +45,14 @@ export default function Edit( { attributes, setAttributes } ) {
 			${backgroundParallax ? 'image-fixed' : ''}
 		`,
     });
+
+	const allBlocks = useSelect((select) => {
+        const blocks = select('core/blocks').getBlockTypes();
+        return blocks.map((block) => block.name);
+    }, []);
+
+	const disallowedBlock = 'lupus-plugin/section';
+    const allowedBlocks = allBlocks.filter((blockName) => blockName !== disallowedBlock);
 
 	const generateText = (message) => {
 		let text_ = message + ' ';
@@ -67,7 +77,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							'lupus-plugin'
 						) }
 						help={ __(
-							'Whether the section shall cover the whole screen height',
+							'Whether the section shall cover at least the whole screen height',
 							'lupus-plugin'
 						) }
 						onChange={ () =>
@@ -98,6 +108,40 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
                 </PanelBody>
+				<PanelBody title={ __( 'Before/After Element Settings', 'lupus-plugin' ) }>
+					<ToggleControl
+						checked={ !! beforeElement }
+						label={ __(
+							'Before Element',
+							'lupus-plugin'
+						) }
+						help={ __(
+							'Element is not visible and does nothing by default, but maybe your theme does something cool with it',
+							'lupus-plugin'
+						) }
+						onChange={ () =>
+							setAttributes( {
+								beforeElement: ! beforeElement,
+							} )
+						}
+					/>
+					<ToggleControl
+						checked={ !! afterElement }
+						label={ __(
+							'After Element',
+							'lupus-plugin'
+						) }
+						help={ __(
+							'Element is not visible and does nothing by default, but maybe your theme does something cool with it',
+							'lupus-plugin'
+						) }
+						onChange={ () =>
+							setAttributes( {
+								afterElement: ! afterElement,
+							} )
+						}
+					/>
+				</PanelBody>
 				{ (background!='image') && (
 					<PanelBody title={ __( 'Background Settings', 'lupus-plugin' ) }>
 						<SelectControl
@@ -170,7 +214,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										'lupus-plugin'
 									) }
 									help={ __(
-										'Whether background shall be fixed or move when scrolling',
+										'Whether background shall be attached or move when scrolling. Disabled when client prefers reduced motion',
 										'lupus-plugin'
 									) }
 									onChange={ () =>
@@ -202,7 +246,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<section { ...blockProps }>
 				<div className={`${blockName}__inner`}>
-					<InnerBlocks />
+					<InnerBlocks
+						allowedBlocks={allowedBlocks}
+						templateLock={false}
+					/>
 				</div>
 				{ ((background!='image') && (backgroundFeature=='background-logo')) && (
 					<div className={`${blockName}__logo-container`}></div>
