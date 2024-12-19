@@ -46,7 +46,7 @@ export default function save( { attributes } ) {
 				<div className={`${blockName}__before ${blockName}__before-after ${background ? background : ''}`}></div>
 			) }
 			<section { ...blockProps }>
-				<div className={`${blockName}__inner`}>
+				<div className={`${blockName}__inner is-layout-constrained`}>
 					<InnerBlocks.Content />
 				</div>
 				{ ((background!='image') && (backgroundFeature=='background-logo')) && (

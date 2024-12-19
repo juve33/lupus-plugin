@@ -245,7 +245,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				) }
 			</InspectorControls>
 			<section { ...blockProps }>
-				<div className={`${blockName}__inner`}>
+				<div className={`${blockName}__inner is-layout-constrained`}>
 					<InnerBlocks
 						allowedBlocks={allowedBlocks}
 						templateLock={false}
