@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lupus-plugin/header",
+	"version": "0.1.0",
+	"title": "Header",
+	"category": "design",
+	"icon": "text-page",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"anchor": true,
+		"html": false
+	},
+	"attributes": {
+		"fullSized": {
+			"type": "boolean",
+			"default": false
+		},
+		"background": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageURL": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundParallax": {
+			"type": "boolean",
+			"default": true
+		},
+		"photoCredit": {
+			"type": "boolean",
+			"default": true
+		},
+		"photoCreditText": {
+			"type": "string",
+			"default": "",
+			"source": "html",
+			"selector": "p"
+		},
+		"backgroundFeature": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundMessage": {
+			"type": "string",
+			"default": ""
+		},
+		"beforeElement": {
+			"type": "boolean",
+			"default": false
+		},
+		"afterElement": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"textdomain": "header",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

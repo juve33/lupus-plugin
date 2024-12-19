@@ -20,13 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-function create_block_section_block_init() {
+function create_blocks_init() {
 
+	register_block_type( __DIR__ . '/blocks/header/build' );
 	register_block_type( __DIR__ . '/blocks/section/build' );
 
 }
 
-add_action( 'init', 'create_block_section_block_init' );
+add_action( 'init', 'create_blocks_init' );
 
 
 
