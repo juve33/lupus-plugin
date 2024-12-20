@@ -43,13 +43,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		`,
     });
 
-	const allBlocks = useSelect((select) => {
-        const blocks = select('core/blocks').getBlockTypes();
-        return blocks.map((block) => block.name);
-    }, []);
-
-	const disallowedBlock = 'lupus-plugin/section';
-    const allowedBlocks = allBlocks.filter((blockName) => blockName !== disallowedBlock);
+    const allowedBlocks = [
+		'core/heading',
+		'core/paragraph'
+	];
 
 	return (
 		<>

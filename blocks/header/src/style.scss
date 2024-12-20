@@ -11,11 +11,13 @@
 	width: 100%;
 	overflow: hidden;
 
+	color: var(--alternative-font-color, white);
+
 	z-index: 1;
 }
 
-.wp-block-lupus-plugin-header__before-after {
-	display: none;
+.wp-block-lupus-plugin-header__inner {
+	padding-block: 2em;
 }
 
 .wp-block-lupus-plugin-header.full-sized {
@@ -28,69 +30,8 @@
 	scroll-margin: 0 0 0;
 }
 
-.wp-block-lupus-plugin-header.alternative-colors {
-	color: var(--alternative-font-color, white);
-	background: fixed var(--alternative-background-color, dimgray);
-}
-
-.wp-block-lupus-plugin-header__logo-container {
-	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-	background: fixed center calc(50% + var(--wp-support-bar) / 2) / 300px no-repeat;
-    background-image: var(--alternative-logo-src, var(--logo-src, var(--wp-logo-url)));
-    filter: grayscale(1);
-    opacity: 15%;
-
-	z-index: 0;
-}
-
-.wp-block-lupus-plugin-header__message-container {
-	position: absolute;
-    top: 0;
-	bottom: 0;
-    left: 0;
-	right: 0;
-
-	display: grid;
-    align-content: space-between;
-	justify-content: center;
-
-    overflow: hidden;
-
-	font-weight: bold;
-    font-size: 2.5em;
-    text-align: center;
-
-    opacity: 15%;
-
-    user-select: none;
-
-	z-index: 0;
-}
-
-.wp-block-lupus-plugin-header__message-line {
-	display: flex;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.wp-block-lupus-plugin-header__message-line__inner {
-	position: relative;
-	width: fit-content;
-    text-wrap: nowrap;
-}
-
-.wp-block-lupus-plugin-header__message-group:nth-of-type(odd) .wp-block-lupus-plugin-header__message-line:nth-of-type(even) .wp-block-lupus-plugin-header__message-line__inner,
-.wp-block-lupus-plugin-header__message-group:nth-of-type(even) .wp-block-lupus-plugin-header__message-line:nth-of-type(odd) .wp-block-lupus-plugin-header__message-line__inner {
-	transform: translate(-50%);
-}
-
-.wp-block-lupus-plugin-header.image {
-	color: var(--alternative-font-color, white);
+.wp-block-lupus-plugin-header.full-sized .wp-block-lupus-plugin-header__inner {
+	padding-block: 0;
 }
 
 .wp-block-lupus-plugin-header__image-overlay,
