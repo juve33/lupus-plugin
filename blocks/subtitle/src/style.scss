@@ -1,0 +1,73 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-lupus-plugin-header,
+.wp-block-lupus-plugin-header__inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+
+	color: var(--alternative-font-color, white);
+
+	z-index: 1;
+}
+
+.wp-block-lupus-plugin-header__inner {
+	padding-block: 2em;
+}
+
+.wp-block-lupus-plugin-header.full-sized {
+    min-height: calc(100vh - var(--wp-support-bar, 0px));
+    min-height: calc(100svh - var(--wp-support-bar, 0px));
+
+    align-content: center;
+
+	scroll-snap-align: start;
+	scroll-margin: 0 0 0;
+}
+
+.wp-block-lupus-plugin-header.full-sized .wp-block-lupus-plugin-header__inner {
+	padding-block: 0;
+}
+
+.wp-block-lupus-plugin-header__image-overlay,
+.wp-block-lupus-plugin-header__image-container {
+	position: absolute;
+    top: 0;
+	bottom: 0;
+    left: 0;
+	right: 0;
+}
+
+.wp-block-lupus-plugin-header__image-overlay {
+	background: #0003;
+
+	z-index: 0;
+}
+
+.wp-block-lupus-plugin-header__image-container {
+	background: no-repeat scroll center / cover;
+
+	z-index: -1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .wp-block-lupus-plugin-header.image-fixed .wp-block-lupus-plugin-header__image-overlay,
+	.wp-block-lupus-plugin-header.image-fixed .wp-block-lupus-plugin-header__image-container {
+		background-attachment: fixed;
+	}
+}
+
+.wp-block-lupus-plugin-header__photocredit {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+	padding: .5em 1em;
+
+	z-index: 1;
+}

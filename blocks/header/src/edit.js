@@ -45,7 +45,8 @@ export default function Edit( { attributes, setAttributes } ) {
 
     const allowedBlocks = [
 		'core/heading',
-		'core/paragraph'
+		'core/paragraph',
+		'lupus-plugin/subtitle'
 	];
 
 	return (

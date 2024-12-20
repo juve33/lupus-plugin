@@ -21,6 +21,7 @@ export default function save( { attributes } ) {
 	const blockProps = useBlockProps.save({
         className: `
 			${fullSized ? 'full-sized' : ''}
+			image
 			${backgroundParallax ? 'image-fixed' : ''}
 		`,
     });

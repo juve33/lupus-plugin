@@ -24,6 +24,7 @@ function create_blocks_init() {
 
 	register_block_type( __DIR__ . '/blocks/header/build' );
 	register_block_type( __DIR__ . '/blocks/section/build' );
+	register_block_type( __DIR__ . '/blocks/subtitle/build' );
 
 }
 
