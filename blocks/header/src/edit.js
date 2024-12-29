@@ -43,10 +43,15 @@ export default function Edit( { attributes, setAttributes } ) {
 		`,
     });
 
-    const allowedBlocks = [
+    const ALLOWED_BLOCKS = [
 		'core/heading',
 		'core/paragraph',
 		'lupus-plugin/subtitle'
+	];
+
+	const TEMPLATE = [
+		[ 'lupus-plugin/subtitle', { placeholder: __( 'Subtitle' ) }],
+		[ 'core/heading', { placeholder: __( 'Title' ) }],
 	];
 
 	return (
@@ -130,7 +135,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			<header { ...blockProps }>
 				<div className={`${blockName}__inner is-layout-constrained`}>
 					<InnerBlocks
-						allowedBlocks={allowedBlocks}
+						allowedBlocks={ ALLOWED_BLOCKS }
+						template={ TEMPLATE }
 						templateLock={false}
 					/>
 				</div>

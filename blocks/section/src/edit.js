@@ -46,13 +46,19 @@ export default function Edit( { attributes, setAttributes } ) {
 		`,
     });
 
-	const allBlocks = useSelect((select) => {
-        const blocks = select('core/blocks').getBlockTypes();
-        return blocks.map((block) => block.name);
+	const ALL_BLOCKS = useSelect((select) => {
+        const BLOCKS = select('core/blocks').getBlockTypes();
+        return BLOCKS.map((block) => block.name);
     }, []);
 
-	const disallowedBlock = 'lupus-plugin/section';
-    const allowedBlocks = allBlocks.filter((blockName) => blockName !== disallowedBlock);
+	const DISALLOWED_BLOCKS = 'lupus-plugin/section';
+    const ALLOWED_BLOCKS = ALL_BLOCKS.filter((blockName) => blockName !== DISALLOWED_BLOCKS);
+
+	const TEMPLATE = [
+		[ 'lupus-plugin/subtitle', { placeholder: __( 'Subtitle' ) }],
+		[ 'core/heading', { placeholder: __( 'Title' ) }],
+		[ 'core/paragraph', { placeholder: __( 'Enter Text...' ) }],
+	];
 
 	const generateText = (message) => {
 		let text_ = message + ' ';
@@ -247,7 +253,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			<section { ...blockProps }>
 				<div className={`${blockName}__inner is-layout-constrained`}>
 					<InnerBlocks
-						allowedBlocks={allowedBlocks}
+						allowedBlocks={ ALLOWED_BLOCKS }
+						template={ TEMPLATE }
 						templateLock={false}
 					/>
 				</div>
