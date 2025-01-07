@@ -1,0 +1,25 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-lupus-plugin-horizontal-scroll {
+	width: 100%;
+
+	overflow-y: hidden;
+}
+
+.wp-block-lupus-plugin-horizontal-scroll__inner {}
+
+.wp-block-lupus-plugin-horizontal-scroll .wp-block-lupus-plugin-section {
+	display: inline-block;
+
+	height: calc(100vh - var(--wp-support-bar, 0px));
+    height: calc(100svh - var(--wp-support-bar, 0px));
+	width: 100%;
+	padding: 0;
+
+    align-content: center;
+}

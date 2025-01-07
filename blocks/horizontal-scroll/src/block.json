@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lupus-plugin/horizontal-scroll",
+	"version": "0.1.0",
+	"title": "Horizontal Scroll",
+	"category": "design",
+	"icon": "text-page",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"anchor": true,
+		"html": false
+	},
+	"attributes": {
+		"background": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundFeature": {
+			"type": "string",
+			"default": ""
+		},
+		"beforeElement": {
+			"type": "boolean",
+			"default": false
+		},
+		"afterElement": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"textdomain": "horizontal-scroll",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function create_blocks_init() {
 
 	register_block_type( __DIR__ . '/blocks/header/build' );
+	register_block_type( __DIR__ . '/blocks/horizontal-scroll/build' );
 	register_block_type( __DIR__ . '/blocks/section/build' );
 	register_block_type( __DIR__ . '/blocks/subtitle/build' );
 
@@ -58,8 +59,30 @@ add_action('customize_register', 'lupusplugin_customize_register');
 
 
 
-wp_enqueue_style('lupusplugin-variables', WP_PLUGIN_DIR . '/blocks/section/build/style-index.css');
-wp_add_inline_style('lupusplugin-variables', ':root { --wp-support-bar: 0px"); } .customize-support { --wp-support-bar: 32px"); }');
+$uses_wp_support_bar = array(
+    array('lupusplugin-variables-header','header/build/style-index.css'),
+    array('lupusplugin-variables-section','section/build/style-index.css'),
+    array('lupusplugin-variables-horizontal-scroll','horizontal-scroll/build/style-index.css'),
+);
+foreach ( $uses_wp_support_bar as $block ) :
+    wp_enqueue_style($block[0], WP_PLUGIN_DIR . '/blocks/' . $block[1]);
+    wp_add_inline_style($block[0], '
+        :root {
+            --wp-support-bar: 0px");
+        }
+            
+        .customize-support {
+            --wp-support-bar: 32px");
+        } 
+            
+        @media (max-width: 782px) {
+            .customize-support {
+                --wordpress-support-bar: 46px;
+            }
+        }
+    ');
+endforeach;
+
 wp_add_inline_style('lupusplugin-variables', ':root { --wp-logo-url: url("' . admin_url('images/wordpress-logo.svg') . '"); }');
 
 if( function_exists( 'the_custom_logo' ) ) {
