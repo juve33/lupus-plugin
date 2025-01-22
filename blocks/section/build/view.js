@@ -1,0 +1,1 @@
+(()=>{function i(){$(".wp-block-lupus-plugin-section.full-sized").each((function(){$(this).outerHeight()>parseFloat($(this).css("min-height"))?$(this).addClass("overflowing"):$(this).removeClass("overflowing")}))}$(document).ready((function(){i(),$(window).on("resize",(function(){i()}))}))})();

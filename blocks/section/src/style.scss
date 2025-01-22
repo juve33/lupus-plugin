@@ -28,6 +28,10 @@
 	scroll-margin: 0 0 0;
 }
 
+.wp-block-lupus-plugin-section.overflowing {
+	scroll-snap-align: initial;
+}
+
 .wp-block-lupus-plugin-section.alternative-colors {
 	color: var(--alternative-font-color, white);
 	background: fixed var(--alternative-background-color, dimgray);
