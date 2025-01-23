@@ -65,7 +65,7 @@ $uses_wp_support_bar = array(
     array('lupusplugin-variables-horizontal-scroll','horizontal-scroll/build/style-index.css'),
 );
 foreach ( $uses_wp_support_bar as $block ) :
-    wp_enqueue_style($block[0], WP_PLUGIN_DIR . '/blocks/' . $block[1]);
+    wp_enqueue_style($block[0], WP_PLUGIN_URL . '/lupus-plugin/blocks/' . $block[1]);
     wp_add_inline_style($block[0], '
         :root {
             --wp-support-bar: 0px");
@@ -83,7 +83,20 @@ foreach ( $uses_wp_support_bar as $block ) :
     ');
 endforeach;
 
-wp_add_inline_style('lupusplugin-variables', ':root { --wp-logo-url: url("' . admin_url('images/wordpress-logo.svg') . '"); }');
+
+
+if( ! function_exists( 'get_plugin_data' ) ) {
+
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+}
+
+$plugin_data = get_plugin_data( __FILE__ );
+$version = $plugin_data['Version'];
+
+wp_enqueue_style( 'lupusplugin-variables', WP_PLUGIN_URL . '/lupus-plugin/assets/css/variables.css', array(), $version );
+
+wp_add_inline_style( 'lupusplugin-variables', ':root { --wp-logo-url: url("' . admin_url('images/wordpress-logo.svg') . '"); }' );
 
 if( function_exists( 'the_custom_logo' ) ) {
 
@@ -91,7 +104,7 @@ if( function_exists( 'the_custom_logo' ) ) {
 	$logo = wp_get_attachment_image_src( $custom_logo_id, 500 );
 
 	if ( $logo ) {
-		wp_add_inline_style('lupusplugin-variables', ':root { --logo-src: url("' . $logo[0] . '"); }');
+		wp_add_inline_style(' lupusplugin-variables', ':root { --logo-src: url("' . $logo[0] . '"); }' );
 	}
 
 }
@@ -100,5 +113,5 @@ $alternative_custom_logo_id = get_theme_mod( 'alternative_logo' );
 $alternative_logo = wp_get_attachment_image_src( $alternative_custom_logo_id, 500 );
 
 if ( $alternative_logo ) {
-	wp_add_inline_style('lupusplugin-variables', ':root { --alternative-logo-src: url("' . $alternative_logo[0] . '"); }');
+	wp_add_inline_style( 'lupusplugin-variables', ':root { --alternative-logo-src: url("' . $alternative_logo[0] . '"); }' );
 }
