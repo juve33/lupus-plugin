@@ -50,8 +50,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	];
 
 	const TEMPLATE = [
-		[ 'lupus-plugin/subtitle', { placeholder: __( 'Subtitle' ) }],
-		[ 'core/heading', { placeholder: __( 'Title' ) }],
+		[ 'lupus-plugin/subtitle', { placeholder: __( 'Subtitle' ) } ],
+		[ 'core/heading', { level: 1, placeholder: __( 'Title' ) } ],
 	];
 
 	return (
