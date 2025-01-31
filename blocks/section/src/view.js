@@ -28,6 +28,14 @@ function checkOverflowing() {
             $(this).removeClass('overflowing');
         }
     });
+
+    $( '.wrapper > header.full-sized:first-child + *' ).each(function() {
+        if ($(this).outerHeight() > parseFloat($( 'header.full-sized' ).css( 'min-height'))) {
+            $(this).addClass('overflowing');
+        } else {
+            $(this).removeClass('overflowing');
+        }
+    });
 }
 
 $(document).ready(function() {
