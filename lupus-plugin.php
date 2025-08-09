@@ -104,7 +104,7 @@ if( function_exists( 'the_custom_logo' ) ) {
 	$logo = wp_get_attachment_image_src( $custom_logo_id, 500 );
 
 	if ( $logo ) {
-		wp_add_inline_style(' lupusplugin-variables', ':root { --logo-src: url("' . $logo[0] . '"); }' );
+		wp_add_inline_style( 'lupusplugin-variables', ':root { --logo-src: url("' . $logo[0] . '"); }' );
 	}
 
 }
