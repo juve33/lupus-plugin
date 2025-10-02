@@ -46,12 +46,16 @@ export default function Edit( { attributes, setAttributes } ) {
     const ALLOWED_BLOCKS = [
 		'core/heading',
 		'core/paragraph',
+		'core/post-date',
+		'core/post-title',
+		'core/query-title',
 		'lupus-plugin/subtitle'
 	];
 
 	const TEMPLATE = [
 		[ 'lupus-plugin/subtitle', { placeholder: __( 'Subtitle' ) } ],
-		[ 'core/heading', { level: 1, placeholder: __( 'Title' ) } ],
+		[ 'core/post-title', { level: 1 } ],
+		[ 'core/post-date' ],
 	];
 
 	return (
